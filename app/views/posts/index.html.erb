@@ -1,0 +1,24 @@
+<div class="posts">
+  <% @posts.each do |post| %>
+    <div class="post">
+
+      <h2 class="title">
+        <!-- link to post -->
+        <%= link_to post.title, post_path(post.id) %>
+      </h2>
+
+      <small class="meta">
+        <span class="author">by <%= post.author %> -</span>
+        <em class="created_at"><%= post.created_at %></em>
+      </small>
+
+      <p class="body"><%= post.body %></p>
+
+      <%= link_to 'Edit', edit_post_path(post.id) %>
+      <%= link_to 'Delete', post_path(post.id), method: :delete, data: { confirm: "Are you sure want to delete '#{post.title}'?"} %>
+    </div>
+    <hr />
+  <% end %>
+</div>
+
+<%= link_to 'New Post', new_post_path %>

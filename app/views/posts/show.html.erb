@@ -1,0 +1,57 @@
+
+<%= link_to 'Back to Posts', posts_path %>
+
+
+
+<div class="post">
+  <h2 class="title">
+    <%= @post.title %>
+  </h2>
+
+  <small class="meta">
+    <span class="author">by <%= @post.author %> -</span>
+    <em class="created_at"><%= @post.created_at %></em>
+  </small>
+
+  <p class="body"><%= @post.body %></p>
+
+  <br /><br />
+  <br /> <br />
+  <div class="comments">
+    <h3>Comments:</h3>
+    <% @post.comments.each_with_index do |comment, index| %>
+      <p class="comment">
+        <small class="comment_meta">
+          <span class="comment_author">#<%= index %> by <%= comment.author %> -</span>
+          <em class="comment_created_at"><%= comment.created_at %></em>
+        </small>
+
+        <p class="comment_body"><%= comment.body %></p>
+      </p>
+
+      <%= form_for [@post, comment], method: "delete" do %>
+        <%= submit_tag "Delete Comment" %>
+      <% end %>
+
+      <hr />
+      <hr />
+    <% end %>
+
+    <!-- display errors -->
+    <%= render 'shared/errors', obj: @comment %>
+    
+    <%= form_for [@post, @comment] do |f| %>
+      <%= f.label 'Comment' %>
+      <%= f.text_area :body %>
+      <br /><br />
+      <%= f.label :author %>
+      <%= f.text_field :author %>
+      <br /><br />
+      <%= f.submit %>
+    <% end %>
+
+    <hr />
+  </div>
+</div>
+<br />
+

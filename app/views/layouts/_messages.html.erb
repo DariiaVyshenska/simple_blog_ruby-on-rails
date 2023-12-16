@@ -1,0 +1,7 @@
+<% flash.each do |name, msg| %>
+  <% if msg.is_a? String %>
+    <p style="color: <%= name == 'success' ? 'green' : 'red' %>">
+      <%= msg %>
+    </p>
+  <% end %>
+<% end %>
